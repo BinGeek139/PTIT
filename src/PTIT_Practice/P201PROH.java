@@ -2,20 +2,31 @@ package PTIT_Practice;
 import java.util.Scanner;
 
 public class P201PROH {
-    private static final Scanner reader = new Scanner(System.in);
+   private static final Scanner reader = new Scanner(System.in);
+    private  static long check;
     public static void main(String[] args) {
-        int T = reader.nextInt();
-        for (int t = 1; t <= T; t++) {
-            int A = reader.nextInt();
-            int B = reader.nextInt();
-            System.out.println(queue(A, B));
+        long T = reader.nextLong();
+        for (long t = 1; t <= T; t++) {
+            long A = reader.nextLong();
+            long B = reader.nextLong();
+            check=A;
+            String result=tryHard(A,B) ? "YES" : "NO";
+            System.out.println(result);
 
         }
     }
-    private static String queue(int a, int b) {
-        if (a == 1 && b > 1) return "NO";
-        if (a == 2 && b > 3) return "NO";
-        if (a == 3 && b > 3) return "NO";
-        return "YES";
+    public  static boolean tryHard(long a,long b){
+        if(a>=b ) return true;
+        if(a <=1 ){
+            return false;
+        } else {
+
+            if(a%2==1){
+                return ((a-1) != check) && tryHard(a-1,b);
+            }else {
+                return ((a*3)/2 != check)&& (tryHard(a*3/2,b));
+            }
+        }
+
     }
 }
